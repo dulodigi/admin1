@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Order via WhatsApp</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .card h2 {
+      text-align: center;
+      color: #25d366;
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 6px;
+      display: block;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border: 1px solid #25d366;
+      box-shadow: 0 0 6px rgba(37, 211, 102, 0.3);
+    }
+    button {
+      width: 100%;
+      background: #25d366;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    button:hover {
+      background: #1ebe5d;
+    }
+    .wa-icon {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Order Sewa Akun</h2>
+    <form id="waForm">
+      <label>Nomor HP</label>
+      <input type="text" id="nomor" placeholder="Contoh: 081234567890" required>
+
+      <label>Durasi Sewa</label>
+      <select id="durasi" required>
+        <option value="">-- Pilih Durasi --</option>
+        <option>1 Hari</option>
+        <option>3 Hari</option>
+        <option>7 Hari</option>
+        <option>1 Bulan</option>
+        <option>3 Bulan</option>
+        <option>6 Bulan</option>
+      </select>
+
+      <label>Catatan</label>
+      <textarea id="catatan" rows="4" placeholder="Tulis catatan Anda..." required></textarea>
+
+      <button type="submit">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-icon" alt="WA"> 
+        Kirim ke WhatsApp
+      </button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("waForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let nomor = document.getElementById("nomor").value;
+      let durasi = document.getElementById("durasi").value;
+      let catatan = document.getElementById("catatan").value;
+
+      // nomor WA tujuan (ganti sesuai kebutuhan)
+      let noWaTujuan = "62895708398855";  
+      let pesan = `Nomor HP: ${nomor}\nDurasi Sewa: ${durasi}\nCatatan: ${catatan}`;
+
+      let url = `https://wa.me/${noWaTujuan}?text=${encodeURIComponent(pesan)}`;
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
